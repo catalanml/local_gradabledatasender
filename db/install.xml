@@ -1,0 +1,20 @@
+<XMLDB xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" PATH="local/gradabledatasender/db"
+    VERSION="2024012000" COMMENT="XMLDB file for Moodle local/gradabledatasender"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+
+    <TABLES>
+        <TABLE NAME="gradabledatasender_log" COMMENT="log from observer events">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" />
+                <FIELD NAME="data" TYPE="text" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="message" TYPE="text" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="created" TYPE="int" LENGTH="18" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="sended" TYPE="int" LENGTH="18" NOTNULL="false" SEQUENCE="false" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+                <KEY NAME="logstoreid" TYPE="foreign" FIELDS="logstoreid" REFTABLE="logstore_standard_log" REFFIELDS="id" COMMENT="Logstore ref"/>
+            </KEYS>
+        </TABLE>
+    </TABLES>
+</XMLDB>
