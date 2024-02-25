@@ -58,6 +58,16 @@ if ($hassiteconfig) {
         $settingspage->add($setting);
     }
 
+    $ADMIN->add(
+        $componentname,
+        new \admin_externalpage(
+            'test',
+            'test',
+            new \moodle_url('/local/gradabledatasender/manage.php'),
+            //'local/manage_templates:can_manage_templates'
+        )
+    );
+
     // Add the settings page to the nav tree.
     $ADMIN->add($componentname, $settingspage);
 
