@@ -77,11 +77,9 @@ function send_historical_data()
     //for each quiz, get submitted attempts finished from 10-01-2024 00:00(ten of january of 2024) 
 
     foreach ($valid_quizes as $quizid) {
-        //$attempts_sql = "SELECT * FROM {quiz_attempts} WHERE quiz = ? AND state = 'finished' AND timefinish > ?";
-        //$attempts = $DB->get_records_sql($attempts_sql, [$quizid, 1704844800]);
 
-        $attempts_sql = "SELECT * FROM {quiz_attempts} WHERE quiz = ? AND state = 'finished' ";
-        $attempts = $DB->get_records_sql($attempts_sql, [$quizid]);
+        $attempts_sql = "SELECT * FROM {quiz_attempts} WHERE quiz = ? AND state = 'finished' AND timefinish > ?";
+        $attempts = $DB->get_records_sql($attempts_sql, [$quizid, 1704844800]);
 
         foreach ($attempts as $attempt) {
 
@@ -123,7 +121,7 @@ function send_historical_data()
 
             $log_record = $DB->get_record('gradabledatasender_log', array('id' => $record_id));
 
-            //send_quiz_data($log_record, $tosend);
+            send_quiz_data($log_record, $tosend);
         }
     }
 }
@@ -177,6 +175,7 @@ function send_quiz_data(stdClass $log_record, array $tosend)
                     $log_record->message = 'Failed to send data';
                     $DB->update_record('gradabledatasender_log', $log_record);
                 }
+
             } else {
                 $log_record->message = 'Failed to get token';
                 $DB->update_record('gradabledatasender_log', $log_record);
@@ -185,7 +184,7 @@ function send_quiz_data(stdClass $log_record, array $tosend)
             $curl->close();
         }
     } catch (\Throwable $th) {
-        $log_record->message = 'Failed to send data';
+        $log_record->message = 'WS ERROR';
         $DB->update_record('gradabledatasender_log', $log_record);
     }
 }

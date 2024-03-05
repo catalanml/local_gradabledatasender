@@ -27,11 +27,20 @@ class local_gradabledatasender_observer
 
         $data = $event->get_data();
 
-        $student = $DB->get_record('user', array('id' => $data['relateduserid']));
+        $specified_quizes = get_config('gradabledatasender', 'specificied_quizes');
+
+        $specified_quizes = explode(',', $specified_quizes);
 
         $cm = get_coursemodule_from_id('quiz', $data['contextinstanceid']);
 
         $quiz_record = $DB->get_record('quiz', array('id' => $cm->instance));
+
+        if (!in_array($quiz_record->id, $specified_quizes)) {
+            return false;
+        }
+
+        $student = $DB->get_record('user', array('id' => $data['relateduserid']));
+
         $c = get_course($quiz_record->course);
         $quiz = new quiz($quiz_record, $cm, $c);
 
@@ -67,7 +76,7 @@ class local_gradabledatasender_observer
 
         $log_record = $DB->get_record('gradabledatasender_log', array('id' => $record_id));
 
-        //send_quiz_data($log_record, $tosend);
+        send_quiz_data($log_record, $tosend);
 
         return true;
     }

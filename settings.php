@@ -22,6 +22,15 @@ if ($hassiteconfig) {
     // Create a settings page for local_bcn_mailer.
     $settingspage = new \admin_settingpage('gradabledatasender', get_string('pluginname', $componentname));
 
+    $quiz_options = [];
+
+    $quizessql = "SELECT id, name FROM {quiz} order by id asc";
+    $quizes = $DB->get_records_sql($quizessql);
+
+    foreach ($quizes as $quiz) {
+        $quiz_options[$quiz->id] = $quiz->id . ' - ' .$quiz->name;
+    }
+
     // Make a container for all of the settings for the settings page.
     $settings = [];
 
@@ -52,6 +61,14 @@ if ($hassiteconfig) {
         new lang_string('current_token', $componentname),
         ''
     );
+
+    $settingspage->add(new \admin_setting_configmultiselect(
+        'gradabledatasender/specificied_quizes',
+        get_string('specificied_quizes', $componentname),
+        get_string('specificied_quizes', $componentname),
+        [],
+        $quiz_options
+    ));
 
     // Add all the settings to the settings page.
     foreach ($settings as $setting) {

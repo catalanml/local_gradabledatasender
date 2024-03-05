@@ -10,3 +10,4 @@ $string['destiny_endpoint'] = 'Destiny Endpoint';
 $string['endpoint_username'] = 'Endpoint Username';
 $string['endpoint_password'] = 'Endpoint Password';
 $string['current_token'] = 'Current Token';
+$string['specificied_quizes'] = 'Specificied Quizes';
