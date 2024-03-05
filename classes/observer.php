@@ -1,6 +1,10 @@
 <?php
+
+use block_sence\task\sencetask;
+
 require_once($CFG->dirroot . '/mod/quiz/locallib.php');
 require_once($CFG->dirroot . '/mod/quiz/attemptlib.php');
+require_once($CFG->dirroot . '/local/gradabledatasender/lib.php');
 
 /**
  * Version file for component local_gradabledatasender.
@@ -17,7 +21,7 @@ class local_gradabledatasender_observer
      * @param \mod_quiz\event\attempt_reviewed $event
      * @return bool
      */
-    public static function registered_gradable_activity(\mod_quiz\event\attempt_reviewed $event)
+    public static function registered_gradable_activity(\mod_quiz\event\attempt_submitted $event)
     {
         global $DB;
 
@@ -25,9 +29,7 @@ class local_gradabledatasender_observer
 
         $student = $DB->get_record('user', array('id' => $data['relateduserid']));
 
-        $reviewedby = $DB->get_record('user', array('id' => $data['userid']));
-
-        $cm = get_coursemodule_from_id('', $data['contextinstanceid']);
+        $cm = get_coursemodule_from_id('quiz', $data['contextinstanceid']);
 
         $quiz_record = $DB->get_record('quiz', array('id' => $cm->instance));
         $c = get_course($quiz_record->course);
@@ -38,12 +40,10 @@ class local_gradabledatasender_observer
         $quiz->has_questions();
 
         $quiz->load_questions();
-    
+
         $slots = $attempt->get_slots();
 
-        $toprint = [
-            'rut_revisor' => $reviewedby->username,
-            'nombre_revisor' => $reviewedby->firstname,
+        $tosend = [
             'rut' => $student->username,
             'nombre' => $student->firstname,
             'celular' => $student->phone1,
@@ -56,17 +56,19 @@ class local_gradabledatasender_observer
 
         foreach ($slots as $slot) {
             $question_data = $attempt->get_question_attempt($slot);
-            $toprint['respuestas'][$slot] = $question_data->get_state()->__toString();
+            $tosend['respuestas'][$slot] = $question_data->get_state()->__toString();
         }
-        
+
         $record = new stdClass();
-        $record->logstoreid = 1;
-        $record->data = json_encode($toprint);
+        $record->data = json_encode($tosend);
         $record->created = time();
 
-        $DB->insert_record('gradabledatasender_log', $record);
+        $record_id = $DB->insert_record('gradabledatasender_log', $record);
+
+        $log_record = $DB->get_record('gradabledatasender_log', array('id' => $record_id));
+
+        //send_quiz_data($log_record, $tosend);
+
         return true;
-       
-       
     }
 }

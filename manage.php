@@ -14,7 +14,7 @@ $PAGE->set_pagelayout('admin');
 echo $OUTPUT->header();
 echo html_writer::tag('h1', 'TEST');
 
-//var_dump(get_config('gradabledatasender'));
+
 
 
 var_dump(get_config('gradabledatasender'));

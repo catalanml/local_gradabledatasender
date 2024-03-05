@@ -13,7 +13,6 @@
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" />
-                <KEY NAME="logstoreid" TYPE="foreign" FIELDS="logstoreid" REFTABLE="logstore_standard_log" REFFIELDS="id" COMMENT="Logstore ref"/>
             </KEYS>
         </TABLE>
     </TABLES>

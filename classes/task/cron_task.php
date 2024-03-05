@@ -27,7 +27,7 @@ class cron_task extends \core\task\scheduled_task
     }
 
     /** @var string $stringname */
-    protected $stringname = 'cron_name';
+    protected $stringname = 'refresh_token_cron';
 
     /**
      * Execute task
@@ -44,14 +44,14 @@ class cron_task extends \core\task\scheduled_task
             if (($token !== false) && ($token !== $current_token)) {
                 set_config('current_token', $token, 'gradabledatasender');
                 mtrace('Token updated');
+                return true;
             } else {
                 mtrace('Token not updated');
                 return false;
             }
         } catch (\Throwable $th) {
-            var_dump($th);
+            mtrace('Error in external endpoint');
+            return false;
         }
-        
-        return true; // Finished OK.
     }
 }
