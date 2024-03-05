@@ -1,5 +1,5 @@
 <XMLDB xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" PATH="local/gradabledatasender/db"
-    VERSION="2024012000" COMMENT="XMLDB file for Moodle local/gradabledatasender"
+    VERSION="2024030501" COMMENT="XMLDB file for Moodle local/gradabledatasender"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
 
     <TABLES>

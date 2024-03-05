@@ -3,9 +3,6 @@ require_once($CFG->dirroot . '/local/gradabledatasender/lib.php');
 
 function xmldb_local_gradabledatasender_upgrade($oldversion)
 {
-    global $DB;
-
-    //$dbman = $DB->get_manager();
 
     if ($oldversion < 2024030501) {
  
