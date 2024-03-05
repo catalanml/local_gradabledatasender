@@ -35,7 +35,7 @@ class local_gradabledatasender_observer
 
         $quiz_record = $DB->get_record('quiz', array('id' => $cm->instance));
 
-        if (!in_array($quiz_record->id, $specified_quizes)) {
+        if (!in_array($quiz_record->id, $specified_quizes) || $specified_quizes == false ) {
             return false;
         }
 
