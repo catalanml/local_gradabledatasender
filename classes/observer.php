@@ -63,9 +63,15 @@ class local_gradabledatasender_observer
             'respuestas' => [],
         ];
 
+        $auxcounter = 1;
+
         foreach ($slots as $slot) {
             $question_data = $attempt->get_question_attempt($slot);
-            $tosend['respuestas'][$slot] = $question_data->get_state()->__toString();
+            $questionstate = $question_data->get_state()->__toString();
+            if($questionstate !== 'finished'){
+                $tosend['respuestas'][$auxcounter] =  $questionstate;
+            }
+            $auxcounter += 1;
         }
 
         $record = new stdClass();
