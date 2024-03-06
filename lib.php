@@ -164,7 +164,7 @@ function send_quiz_data(stdClass $log_record, array $tosend)
             $curl = new \local_gradabledatasender_curl_manager();
             $refreshed_token = refresh_token();
 
-            if ($refreshed_token !== false && $refreshed_token !== $token) {
+            if ($refreshed_token !== false) {
                 set_config('token', $refreshed_token, 'gradabledatasender');
                 $wsresult  = $curl->make_request(
                     $destiny_endpoint,
