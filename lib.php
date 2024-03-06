@@ -154,6 +154,8 @@ function send_quiz_data(stdClass $log_record, array $tosend)
             $DB->update_record('gradabledatasender_log', $log_record);
             $curl->close();
         } else {
+            $curl->close();
+            $curl = new \local_gradabledatasender_curl_manager();
             $refreshed_token = refresh_token();
 
             if ($refreshed_token !== false && $refreshed_token !== $token) {
@@ -175,7 +177,6 @@ function send_quiz_data(stdClass $log_record, array $tosend)
                     $log_record->message = 'Failed to send data';
                     $DB->update_record('gradabledatasender_log', $log_record);
                 }
-
             } else {
                 $log_record->message = 'Failed to get token';
                 $DB->update_record('gradabledatasender_log', $log_record);
