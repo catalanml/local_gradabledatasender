@@ -32,6 +32,12 @@ function refresh_token()
     $endpoint_username = get_config('gradabledatasender', 'endpoint_username');
     $endpoint_password = get_config('gradabledatasender', 'endpoint_password');
 
+    print_object($destiny_endpoint);
+    print_object($endpoint_username );
+    print_object($endpoint_password);
+
+    print_object($destiny_endpoint . UDLALOGINWS);
+
 
     $data = [
         'username' => $endpoint_username,
@@ -47,6 +53,8 @@ function refresh_token()
             $data,
             $headers
         );
+
+        print_object($wsresult);
 
         if ($wsresult->remote_endpoint_status === 200) {
             $curl->close();
@@ -115,8 +123,9 @@ function send_historical_data()
                 $questionstate = $question_data->get_state()->__toString();
                 if($questionstate !== 'finished'){
                     $tosend['respuestas'][$auxcounter] =  $questionstate;
+                    $auxcounter += 1;
                 }
-                $auxcounter += 1;
+                
             }
 
             $record = new stdClass();

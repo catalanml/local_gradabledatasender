@@ -70,8 +70,9 @@ class local_gradabledatasender_observer
             $questionstate = $question_data->get_state()->__toString();
             if($questionstate !== 'finished'){
                 $tosend['respuestas'][$auxcounter] =  $questionstate;
+                $auxcounter += 1;
             }
-            $auxcounter += 1;
+            
         }
 
         $record = new stdClass();
