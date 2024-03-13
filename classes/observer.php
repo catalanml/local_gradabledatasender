@@ -60,6 +60,7 @@ class local_gradabledatasender_observer
             'curso' => $c->fullname,
             'quizname' => $quiz_record->name,
             'quizid' => $quiz_record->id,
+            'completiondate' => $data['timecreated'],
             'respuestas' => [],
         ];
 

@@ -91,6 +91,7 @@ function send_historical_data()
 
         foreach ($attempts as $attempt) {
 
+            $attempt_data = \quiz_attempt::create($attempt->id);
             $student = $DB->get_record('user', array('id' => $attempt->userid));
             $quiz_record = $DB->get_record('quiz', array('id' => $attempt->quiz));
             $cm = get_coursemodule_from_instance('quiz', $quiz_record->id);
@@ -113,6 +114,7 @@ function send_historical_data()
                 'curso' => $c->fullname,
                 'quizname' => $quiz_record->name,
                 'quizid' => $quiz_record->id,
+                'completiondate' => $attempt_data->get_submitted_date(),
                 'respuestas' => [],
             ];
 
