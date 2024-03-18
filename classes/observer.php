@@ -16,7 +16,7 @@ class local_gradabledatasender_observer
     /**
      * Event processor - user_graded
      *
-     * @param \mod_quiz\event\attempt_reviewed $event
+     * @param \mod_quiz\event\attempt_submitted $event
      * @return bool
      */
     public static function registered_gradable_activity(\mod_quiz\event\attempt_submitted $event)
