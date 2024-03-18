@@ -1,7 +1,5 @@
 <?php
 
-use block_sence\task\sencetask;
-
 require_once($CFG->dirroot . '/mod/quiz/locallib.php');
 require_once($CFG->dirroot . '/mod/quiz/attemptlib.php');
 require_once($CFG->dirroot . '/local/gradabledatasender/lib.php');
