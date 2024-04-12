@@ -20,7 +20,9 @@ echo html_writer::tag('h1', 'TEST');
 var_dump(refresh_token());
 
 $output = shell_exec('ping 20.119.8.50');
+$output2 = shell_exec('ping https://servicios-siae.udla.cl');
 echo "<pre>$output</pre>";
+echo "<pre>$output2</pre>";
 
 //exit;
 echo $OUTPUT->footer();
