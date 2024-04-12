@@ -19,5 +19,8 @@ echo html_writer::tag('h1', 'TEST');
 
 var_dump(refresh_token());
 
+$output = shell_exec('ping 20.119.8.50');
+echo "<pre>$output</pre>";
+
 //exit;
 echo $OUTPUT->footer();
