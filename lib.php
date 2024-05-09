@@ -32,13 +32,6 @@ function refresh_token()
     $endpoint_username = get_config('gradabledatasender', 'endpoint_username');
     $endpoint_password = get_config('gradabledatasender', 'endpoint_password');
 
-    print_object($destiny_endpoint);
-    print_object($endpoint_username );
-    print_object($endpoint_password);
-
-    print_object($destiny_endpoint . UDLALOGINWS);
-
-
     $data = [
         'username' => $endpoint_username,
         'password' => $endpoint_password,
@@ -54,7 +47,6 @@ function refresh_token()
             $headers
         );
 
-        print_object($wsresult);
 
         if ($wsresult->remote_endpoint_status === 200) {
             $curl->close();
