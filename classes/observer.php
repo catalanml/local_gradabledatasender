@@ -52,7 +52,7 @@ class local_gradabledatasender_observer
 
         $tosend = [
             'rut' => $student->username,
-            'nombre' => $student->firstname,
+            'nombre' => $student->firstname . ' ' . $student->lastname,
             'celular' => $student->phone1,
             'email' => $student->email,
             'curso' => $c->fullname,
