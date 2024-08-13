@@ -9,7 +9,7 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->requires   = 2019111809;                       // This plugin requires Moodle VER 3.9.
+$plugin->requires   = 2022041900;                       // This plugin requires Moodle VER 3.9.
 $plugin->version    = 2024030504;                       // This plugins version number.
 $plugin->release    = 'v2.0';                           // This plugins release number.
 $plugin->maturity   = MATURITY_STABLE;
