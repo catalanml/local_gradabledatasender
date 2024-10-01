@@ -10,7 +10,7 @@
 defined('MOODLE_INTERNAL') || die;
 
 $plugin->requires   = 2022041900;                       // This plugin requires Moodle VER 3.9.
-$plugin->version    = 2024030504;                       // This plugins version number.
+$plugin->version    = 2024100101;                       // This plugins version number.
 $plugin->release    = 'v2.0';                           // This plugins release number.
 $plugin->maturity   = MATURITY_STABLE;
 $plugin->component  = 'local_gradabledatasender';
